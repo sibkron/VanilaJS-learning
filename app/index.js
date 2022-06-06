@@ -1,25 +1,28 @@
-/* const person = {
-  name: "Max",
-  age: 25,
-  greet: function () {
-    console.log("greet");
-  },
-}; */
+"use strict";
 
-const person = new Object({
-  name: "Max",
-  age: 25,
-  greet: function () {
-    console.log("greet");
-  },
-});
+const INTERVAL = 500;
+let counter = 0;
+const MAX_VALUE = 10;
+let timer = null;
 
-Object.prototype.sayHello = function () {
-  console.log("Hello!");
+const event = () => {
+  if (counter === MAX_VALUE) {
+    console.log("The end");
+    clearInterval(timer);
+    return;
+  }
+
+  console.dir({ counter, date: new Date() });
+  counter++;
 };
 
-let lena = Object.create(person);
-lena.name = "Elena";
+console.log("Begin");
+timer = setInterval(event, INTERVAL);
 
-const str = new String("string");
-console.log(str);
+/* const MAX_VALUE = 10;
+
+console.log("Begin");
+for (let i = 0; i < MAX_VALUE; i++) {
+  console.dir({ i, data: new Date() });
+}
+console.log("The end"); */
