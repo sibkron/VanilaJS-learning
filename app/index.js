@@ -22,3 +22,4 @@ let lena = Object.create(person);
 lena.name = "Elena";
 
 const str = new String("string");
+console.log(str);
