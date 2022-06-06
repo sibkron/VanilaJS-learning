@@ -1,44 +1,41 @@
 "use strict";
 
 //constants
-const SALUTION = "Ave";
+const adder = (initial = 0) => ({
+  value: initial,
+  steps: [initial],
+  add(value) {
+    this.steps.push(value);
+    this.value += value;
+    return this;
+  },
+});
 
-const COLORS = [
-  /*1*/ "black",
-  /*2*/ "red",
-  /*3*/ "green",
-  /*4*/ "yellow",
-  /*5*/ "blue",
-  /*6*/ "magenta",
-  /*7*/ "cyan",
-  /*8*/ "white",
-];
-
-//functions
-const colorer = (s, color) => `\x1b[3${color}m${s}\x1b[0m`;
-
-const colorize = (name) => {
-  let res = "";
-  const letters = name.split("");
-  let color = 1;
-  for (const letter of letters) {
-    res += colorer(letter, color++);
-    if (color > COLORS.length) color = 1;
+const Adder = class {
+  constructor(initial = 0) {
+    this.steps = [initial];
+    this.value = initial;
   }
-  return res;
+  add(value) {
+    this.steps.push(value);
+    this.value += value;
+    return this;
+  }
 };
 
-const greetings = (name) => {
-  return name.includes("Augustus")
-    ? `${SALUTION}, ${colorize(name)}!`
-    : `Hello, ${name}`;
-};
+//usage
+{
+  const { value, steps } = adder(5).add(-8).add(11);
+  console.log(value);
+  const [a, b, c] = steps;
+  console.log(a, b, c);
+}
 
-//Usage
-const fullName = "Marcus Aurelius Antonius Augustus";
-console.log(greetings(fullName));
-
-const shortName = "Marcus Aurelius";
-console.log(greetings(shortName));
+{
+  const { value, steps } = new Adder(5).add(-8).add(11);
+  console.log(value);
+  const [a, b, c] = steps;
+  console.log(a, b, c);
+}
 
 console.log("--------------------------");
