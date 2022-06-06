@@ -1,35 +1,44 @@
 "use strict";
 
-/* const INTERVAL = 500;
-let counter = 0;
-const MAX_VALUE = 10;
-let timer = null;
+//constants
+const SALUTION = "Ave";
 
-const event = () => {
-  if (counter === MAX_VALUE) {
-    console.log("The end");
-    clearInterval(timer);
-    return;
+const COLORS = [
+  /*1*/ "black",
+  /*2*/ "red",
+  /*3*/ "green",
+  /*4*/ "yellow",
+  /*5*/ "blue",
+  /*6*/ "magenta",
+  /*7*/ "cyan",
+  /*8*/ "white",
+];
+
+//functions
+const colorer = (s, color) => `\x1b[3${color}m${s}\x1b[0m`;
+
+const colorize = (name) => {
+  let res = "";
+  const letters = name.split("");
+  let color = 1;
+  for (const letter of letters) {
+    res += colorer(letter, color++);
+    if (color > COLORS.length) color = 1;
   }
-
-  console.dir({ counter, date: new Date() });
-  counter++;
+  return res;
 };
 
-console.log("Begin");
-timer = setInterval(event, INTERVAL); */
+const greetings = (name) => {
+  return name.includes("Augustus")
+    ? `${SALUTION}, ${colorize(name)}!`
+    : `Hello, ${name}`;
+};
 
-/* const MAX_VALUE = 10;
+//Usage
+const fullName = "Marcus Aurelius Antonius Augustus";
+console.log(greetings(fullName));
 
-console.log("Begin");
-for (let i = 0; i < MAX_VALUE; i++) {
-  console.dir({ i, data: new Date() });
-}
-console.log("The end"); */
+const shortName = "Marcus Aurelius";
+console.log(greetings(shortName));
 
-const add = (a, b) => a + b;
-
-console.log(`Add numbers: 5 + 2 = ${add(5, 2)}`);
-console.log(`Add numbers: 5.1 + 2.1 = ${add(5.1, 2.1)}`);
-console.log("Concatenate: '5' + '2' = " + add("5", "2"));
-console.log(`Substraction: 5 + (-2) = ${add(5, -2)}`);
+console.log("--------------------------");
