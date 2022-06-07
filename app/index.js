@@ -1,41 +1,14 @@
 "use strict";
 
-//constants
-const adder = (initial = 0) => ({
-  value: initial,
-  steps: [initial],
-  add(value) {
-    this.steps.push(value);
-    this.value += value;
-    return this;
-  },
-});
+let scalar1 = 5;
+let scalar2 = scalar1;
+scalar1--;
+scalar2++;
+console.log({ scalar1, scalar2 });
 
-const Adder = class {
-  constructor(initial = 0) {
-    this.steps = [initial];
-    this.value = initial;
-  }
-  add(value) {
-    this.steps.push(value);
-    this.value += value;
-    return this;
-  }
-};
-
-//usage
-{
-  const { value, steps } = adder(5).add(-8).add(11);
-  console.log(value);
-  const [a, b, c] = steps;
-  console.log(a, b, c);
-}
-
-{
-  const { value, steps } = new Adder(5).add(-8).add(11);
-  console.log(value);
-  const [a, b, c] = steps;
-  console.log(a, b, c);
-}
+const object1 = { field: 5 };
+const object2 = object1;
+object2.field = 6;
+console.dir({ object1, object2 });
 
 console.log("--------------------------");
