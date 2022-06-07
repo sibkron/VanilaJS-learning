@@ -1,33 +1,27 @@
 "use strict";
 
-//undefined
-let emptyScalar;
-console.log({ emptyScalar }, typeof emptyScalar);
+const a = 9;
+const b = 14;
+const c = -9;
 
-//null
-const emptyObject = null;
-console.log({ emptyObject }, typeof emptyObject);
+const aBinary = a.toString(2);
+const bBinary = b.toString(2);
+const cBinary = c.toString(2);
 
-//NaN
-let count = NaN;
-console.log({ count }, typeof count);
+console.log(`${a} to base 2: ${aBinary}`);
+console.log(`${b} to base 2: ${bBinary}`);
+console.log(`${c} to base 2: ${cBinary}`);
 
-count = undefined + 1;
-console.dir({ count });
+console.log("Bitwise operators");
 
-console.log(Infinity, -Infinity, typeof Infinity);
+console.log(`${a} & ${b} = ${a & b}`);
+console.log(`${aBinary} & ${bBinary} = ${(a & b).toString(2)}`);
 
-let number = 5;
-console.log(number ?? emptyScalar);
-console.log(number ?? emptyObject);
-
-const s =
-  emptyObject === null ? "emtyObject is null" : "emptyObject is not null";
-console.log({ s });
-
-console.log({ int2: parseInt("11", 2) });
-console.log({ int8: parseInt("11", 8) });
-console.log({ int16: parseInt("11", 16) });
-console.log({ BigInt }, typeof BigInt);
+console.log(`${a} | ${b} = ${a | b}`);
+console.log(`${aBinary} | ${bBinary} = ${(a | b).toString(2)}`);
+console.log(`${a} & ${null} = ${a & null}`);
+console.log(`${a} & ${NaN} = ${a & NaN}`);
+console.log(`${a} & ${Infinity} = ${a & Infinity}`);
+console.log(`${a} & ${undefined} = ${a & undefined}`);
 
 console.log("--------------------------");
