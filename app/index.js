@@ -1,14 +1,34 @@
 "use strict";
 
-let scalar1 = 5;
-let scalar2 = scalar1;
-scalar1--;
-scalar2++;
-console.log({ scalar1, scalar2 });
+const i = 5;
+const f = 10.3;
+const s = "Hello";
+const b = true;
 
-const object1 = { field: 5 };
-const object2 = object1;
-object2.field = 6;
-console.dir({ object1, object2 });
+const person = {
+  name: "Marcus Aurelius",
+  born: 121,
+  city: "Roma",
+  position: "emperor",
+};
+
+person.city = "Odessa";
+
+const cities = ["Athens", "Roma", "London", "Bejing", "Kiev", "Riga"];
+
+cities.push("Odessa");
+cities.unshift("New York");
+
+console.log("shift: " + cities.shift());
+console.log("pop: " + cities.pop());
+
+console.log({ i }, typeof i);
+console.log({ f }, typeof f);
+console.log({ s }, typeof s);
+console.log({ b }, typeof b);
+
+console.log({ person }, typeof person);
+console.log({ isArray: Array.isArray(cities) });
+console.log({ instanceofArray: cities instanceof Array });
 
 console.log("--------------------------");
