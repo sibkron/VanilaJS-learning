@@ -1,34 +1,33 @@
 "use strict";
 
-const i = 5;
-const f = 10.3;
-const s = "Hello";
-const b = true;
+//undefined
+let emptyScalar;
+console.log({ emptyScalar }, typeof emptyScalar);
 
-const person = {
-  name: "Marcus Aurelius",
-  born: 121,
-  city: "Roma",
-  position: "emperor",
-};
+//null
+const emptyObject = null;
+console.log({ emptyObject }, typeof emptyObject);
 
-person.city = "Odessa";
+//NaN
+let count = NaN;
+console.log({ count }, typeof count);
 
-const cities = ["Athens", "Roma", "London", "Bejing", "Kiev", "Riga"];
+count = undefined + 1;
+console.dir({ count });
 
-cities.push("Odessa");
-cities.unshift("New York");
+console.log(Infinity, -Infinity, typeof Infinity);
 
-console.log("shift: " + cities.shift());
-console.log("pop: " + cities.pop());
+let number = 5;
+console.log(number ?? emptyScalar);
+console.log(number ?? emptyObject);
 
-console.log({ i }, typeof i);
-console.log({ f }, typeof f);
-console.log({ s }, typeof s);
-console.log({ b }, typeof b);
+const s =
+  emptyObject === null ? "emtyObject is null" : "emptyObject is not null";
+console.log({ s });
 
-console.log({ person }, typeof person);
-console.log({ isArray: Array.isArray(cities) });
-console.log({ instanceofArray: cities instanceof Array });
+console.log({ int2: parseInt("11", 2) });
+console.log({ int8: parseInt("11", 8) });
+console.log({ int16: parseInt("11", 16) });
+console.log({ BigInt }, typeof BigInt);
 
 console.log("--------------------------");
