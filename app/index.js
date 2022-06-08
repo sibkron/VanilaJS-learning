@@ -1,59 +1,26 @@
 "use strict";
 
-const a = 9;
-const b = 14;
-const c = -9;
+const getDay = (n) => {
+  switch (n) {
+    case 1:
+      return "Monday";
+    case 2:
+      return "Tuesday";
+    case 3:
+      return "Wednesday";
+    case 4:
+      return "Thursday";
+    case 5:
+      return "Friday";
+    case 6:
+      return "Saturday";
+    case 7:
+      return "Sunday";
+    default:
+      return new Error(`Invalid day number: ${n}`);
+  }
+};
 
-const aBinary = a.toString(2);
-const bBinary = b.toString(2);
-const cBinary = c.toString(2);
-
-console.log(`${a} to base 2: ${aBinary}`);
-console.log(`${b} to base 2: ${bBinary}`);
-console.log(`${c} to base 2: ${cBinary}`);
-
-console.log("Bitwise operators");
-
-console.log(`${a} & ${b} = ${a & b}`);
-console.log(`${aBinary} & ${bBinary} = ${(a & b).toString(2)}`);
-
-console.log(`${a} | ${b} = ${a | b}`);
-console.log(`${aBinary} | ${bBinary} = ${(a | b).toString(2)}`);
-
-console.log(`${a} ^ ${b} = ${a ^ b}`);
-console.log(`${aBinary} ^ ${bBinary} = ${(a ^ b).toString(2)}`);
-
-console.log(`${a} ?? ${NaN} = ${a ?? NaN}`);
-console.log(`${aBinary} ?? ${NaN} = ${(a ?? NaN).toString(2)}`);
-
-console.log(`${a} ?? ${null} = ${a ?? null}`);
-console.log(`${aBinary} ?? ${null} = ${(a ?? null).toString(2)}`);
-
-console.log(`${a} ?? ${undefined} = ${a ?? undefined}`);
-console.log(`${aBinary} ?? ${undefined} = ${(a ?? undefined).toString(2)}`);
-
-console.log(`${a} ?? ${Infinity} = ${a ?? Infinity}`);
-console.log(`${aBinary} ?? ${Infinity} = ${(a ?? Infinity).toString(2)}`);
-
-console.log(`${a} ?? " " = ${a ?? " "}`);
-console.log(`${aBinary} ?? " " = ${(a ?? " ").toString(2)}`);
-
-console.log(`${a} ?? 0 = ${a ?? 0}`);
-console.log(`${aBinary} ?? 0 = ${(a ?? 0).toString(2)}`);
-
-console.log(`${a} ?? 0 = ${a ?? 0}`);
-console.log(`${aBinary} ?? 0 = ${(a ?? 0).toString(2)}`);
-
-console.log(`${~a}  = ${~a}`);
-console.log(`${~aBinary} = ${(~a).toString(2)}`);
-
-console.log(`${a << 2}  = ${a << 2}`);
-console.log(`${aBinary << 2} = ${(a << 2).toString(2)}`);
-
-console.log(`${a >>> 2}  = ${a >>> 2}`);
-console.log(`${aBinary >>> 2} = ${(a >>> 2).toString(2)}`);
-
-console.log(`${a << 2}  = ${a << 2}`);
-console.log(`${aBinary << 2} = ${(a << 2).toString(2)}`);
+console.log(getDay(2));
 
 console.log("--------------------------");
