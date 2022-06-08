@@ -1,3 +1,10 @@
 {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "terminal.integrated.profiles.windows": {
+        "PowerShell -nologo": {
+          "source": "PowerShell",
+          "args": ["-nologo"]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell -nologo"
 }
