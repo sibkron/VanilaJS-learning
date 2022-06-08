@@ -1,26 +1,23 @@
 "use strict";
 
-const getDay = (n) => {
-  switch (n) {
-    case 1:
-      return "Monday";
-    case 2:
-      return "Tuesday";
-    case 3:
-      return "Wednesday";
-    case 4:
-      return "Thursday";
-    case 5:
-      return "Friday";
-    case 6:
-      return "Saturday";
-    case 7:
-      return "Sunday";
-    default:
-      return new Error(`Invalid day number: ${n}`);
-  }
+function inc(a) {
+  return a + 1;
+}
+
+const sum = function (a, b) {
+  return a + b;
 };
 
-console.log(getDay(2));
+const max = (a, b) => (a > b ? a : b);
+
+const avg = (a, b) => {
+  const s = sum(a, b);
+  return s / 2;
+};
+
+console.log(`inc(5) = ${inc(5)}`);
+console.log(`sum(1, 3) = ${sum(1, 3)}`);
+console.log(`max(8, 6) = ${max(8, 6)}`);
+console.log(`avg(8, 6) = ${avg(8, 6)}`);
 
 console.log("--------------------------");
