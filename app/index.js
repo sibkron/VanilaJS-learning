@@ -1,42 +1,34 @@
 "use strict";
 
-function inc(a) {
-  return ++a;
+function fnNew(a, b = "Hello", c = 5) {
+  console.dir({ a, b, c });
 }
 
-const sum = function (a, b) {
-  return a + b;
-};
+fnNew(1, 2, 3);
+fnNew(1, 2);
+fnNew(1);
+fnNew();
 
-const max = (a, b) => (a > b ? a : b);
+function fnOld(a, b, c) {
+  b = b || "Hello";
+  c = c || 5;
+  console.dir({ a, b, c });
+}
 
-console.log("Names: ");
-console.dir({
-  inc: inc.name,
-  sum: sum.name,
-  max: max.name,
-});
+fnOld(1, 2, 3);
+fnOld(1, 2);
+fnOld(1);
+fnOld();
 
-console.log("Arguments: ");
-console.dir({
-  inc: inc.length,
-  sum: sum.length,
-  max: max.length,
-});
+function fnHash(args) {
+  args.a = args.a || [7, 25, 10];
+  args.b = args.c || "Hello";
+  args.c = args.c || 5;
+  console.dir(args);
+}
 
-console.log(
-  "Anonymus function: " +
-    function (x) {
-      return x;
-    }.name
-);
-console.log("Anonymus lambda function: " + ((x) => x).name);
-
-console.log("ToString: ");
-console.dir({
-  inc: inc.toString(),
-  sum: sum.toString(),
-  max: max.toString(),
-});
+fnHash({ a: [1, 2, 3], b: "Hi", c: 3 });
+fnHash({ b: "World" });
+fnHash({ c: 7 });
 
 console.log("--------------------------");
