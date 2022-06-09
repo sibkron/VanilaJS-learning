@@ -1,38 +1,42 @@
 "use strict";
 
-const cities = ["Athens", "Roma", "London", "Beijing", "Kiev", "Riga"];
-const f = (s) => s.length;
-
-function f1() {
-  const cities = ["Athens", "Roma"];
-  const f = (s) => s.toUpperCase();
-  console.dir({ cities });
-  console.dir(cities.map(f));
-
-  {
-    const f = (s) => s.toLowerCase();
-    console.dir({ cities });
-    console.dir(cities.map(f));
-  }
-  {
-    const cities = ["London", "Beijing", "Kiev"];
-    console.dir({ cities });
-    console.dir(cities.map(f));
-  }
+function inc(a) {
+  return ++a;
 }
 
-f1();
+const sum = function (a, b) {
+  return a + b;
+};
 
-console.dir({ cities });
-console.dir(cities.map(f));
+const max = (a, b) => (a > b ? a : b);
 
-const power = Math.pow;
-const square = (x) => power(x, 2);
-const cube = (x) => power(x, 3);
+console.log("Names: ");
+console.dir({
+  inc: inc.name,
+  sum: sum.name,
+  max: max.name,
+});
 
-console.log(power(10, 2));
-console.log(square(10));
-console.log(power(10, 3));
-console.log(cube(10));
+console.log("Arguments: ");
+console.dir({
+  inc: inc.length,
+  sum: sum.length,
+  max: max.length,
+});
+
+console.log(
+  "Anonymus function: " +
+    function (x) {
+      return x;
+    }.name
+);
+console.log("Anonymus lambda function: " + ((x) => x).name);
+
+console.log("ToString: ");
+console.dir({
+  inc: inc.toString(),
+  sum: sum.toString(),
+  max: max.toString(),
+});
 
 console.log("--------------------------");
