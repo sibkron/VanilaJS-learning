@@ -1,23 +1,14 @@
 "use strict";
 
-const f1 = (...args) => {
-  console.log(args);
-};
+function f1(a, b) {
+  console.log(`f1(${a}, ${b})`);
+}
 
-f1(1, 2, 3);
+f1(2, 3);
+f1.call(null, 2, 3);
 
-const f2 = (...args) => {
-  args.forEach((arg) => {
-    const type = typeof arg;
-    console.log("Type: " + type);
-    if (type === "object") {
-      console.log("Value: " + JSON.stringify(arg));
-    } else {
-      console.log(`Value: ${arg}`);
-    }
-  });
-};
-
-f2(1, "Marcus", { field: "value" });
+const arr = [2, 3];
+f1(...arr);
+f1.apply(null, arr);
 
 console.log("--------------------------");
