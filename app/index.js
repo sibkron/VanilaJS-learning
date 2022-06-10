@@ -1,14 +1,20 @@
 "use strict";
 
-function f1(a, b) {
-  console.log(`f1(${a}, ${b})`);
-}
+const hash = () => {
+  const data = {};
+  let counter = 0;
+  return (key, value) => {
+    data[key] = value;
+    counter++;
+    console.dir({ counter });
+    return data;
+  };
+};
 
-f1(2, 3);
-f1.call(null, 2, 3);
-
-const arr = [2, 3];
-f1(...arr);
-f1.apply(null, arr);
+const h1 = hash();
+h1("name", "Marcus");
+h1("city", "Roma");
+const obj1 = h1("born", 121);
+console.dir({ obj1 });
 
 console.log("--------------------------");
