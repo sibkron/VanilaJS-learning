@@ -1,19 +1,21 @@
 "use strict";
 
-const add = (x) => (y) => {
-  const z = x + y;
-  console.log(`${x} + ${y} = ${z}`);
-  return add(z);
+const person1 = {};
+person1.name = "Marcus";
+person1.city = "Roma";
+person1.born = 121;
+
+const person2 = new Object();
+person2.name = "Marcus";
+person2.city = "Roma";
+person2.born = 121;
+
+const person3 = {
+  name: "Marcus",
+  city: "Roma",
+  born: 121,
 };
 
-const a1 = add(5);
-const a2 = a1(2);
-const a3 = a2(3);
-const a4 = a1(1);
-const a5 = a2(10);
-console.log(a1, a2, a3, a4, a5);
-
-const res = add(5)(2)(3)(1)(10);
-console.log(res);
+console.dir({ person1, person2, person3 });
 
 console.log("--------------------------");
