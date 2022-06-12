@@ -1,21 +1,31 @@
 "use strict";
 
-const person1 = {};
-person1.name = "Marcus";
-person1.city = "Roma";
-person1.born = 121;
-
-const person2 = new Object();
-person2.name = "Marcus";
-person2.city = "Roma";
-person2.born = 121;
-
-const person3 = {
+const person = {
   name: "Marcus",
   city: "Roma",
   born: 121,
 };
 
-console.dir({ person1, person2, person3 });
+console.log(`Person name is ${person.name}`);
+console.log(`Person name is ${person["name"]}`);
+
+delete person.name;
+console.dir({ person });
+
+delete person["city"];
+console.dir({ person });
+
+const person2 = {
+  name: "Marcus Aurelius",
+  get getCity() {
+    return this.city;
+  },
+  set setCity(value) {
+    this.city = value;
+  },
+};
+
+person2.setCity = "Kiev";
+console.dir({ person2 });
 
 console.log("--------------------------");
