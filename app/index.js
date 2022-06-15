@@ -6,26 +6,43 @@ const person = {
   born: 121,
 };
 
-console.log(`Person name is ${person.name}`);
-console.log(`Person name is ${person["name"]}`);
+if ("name" in person) {
+  console.log(`Person name is ${person.name}`);
+}
 
-delete person.name;
-console.dir({ person });
+for (const key in person) {
+  const value = person[key];
+  console.dir({ key, value });
+}
 
-delete person["city"];
-console.dir({ person });
+const name = "Marcus Aurelius";
+const city = "Roma";
 
-const person2 = {
+const person1 = { name: name, city: city };
+const person2 = { name, city };
+
+const fieldName = "city";
+const fieldValue = "Roma";
+
+const person3 = {
   name: "Marcus Aurelius",
-  get getCity() {
-    return this.city;
-  },
-  set setCity(value) {
-    this.city = value;
-  },
+  [fieldName]: fieldValue,
 };
 
-person2.setCity = "Kiev";
-console.dir({ person2 });
+const person4 = {
+  name: "Marcus Aurelius",
+  ["city" + "Born"]: fieldValue,
+};
+
+function fn(s) {
+  return s + "Born";
+}
+
+const person5 = {
+  name: "Marcus Aurelius",
+  [fn("city")]: fieldValue,
+};
+
+console.dir({ person1, person2, person3, person4, person5 });
 
 console.log("--------------------------");
