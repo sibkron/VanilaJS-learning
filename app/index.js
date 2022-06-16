@@ -1,17 +1,32 @@
 "use strict";
 
-const numbers = [7, 10, 1, 5, 2];
-numbers.forEach((item, i, arr) => {
-  console.log(i, arr, item);
-});
+const log = (s, i) => {
+  console.log(i, s);
+  return s;
+};
 
-[7, 10, 1].forEach((x) => {
-  console.log(x);
-});
+const f1 = (x) => x * 2;
+const f2 = (x) => ++x;
 
-[7, 10, 1].forEach((x) => console.log(x));
+const compose =
+  (...funcs) =>
+  (x) =>
+    funcs.reduce((v, f) => f(v), x);
 
-const log = (x) => console.log(x);
-[7, 10, 1].forEach(log);
+const f3 = compose(f1, f2);
+
+const res1 = [7, 10, 1, 5, 2]
+  .filter((x) => x > 4)
+  .map(f3)
+  .reduce((acc, val) => acc + val);
+
+console.log(res1);
+
+[7, 10, 1, 5, 2]
+  .map(log)
+  .map((x) => x * 2)
+  .map(log)
+  .map((x) => ++x)
+  .map(log);
 
 console.log("--------------------------");
