@@ -1,19 +1,17 @@
 "use strict";
 
-const person = {
-  name: "Marcus",
-  city: "Roma",
-  born: 121,
-};
+const numbers = [7, 10, 1, 5, 2];
+numbers.forEach((item, i, arr) => {
+  console.log(i, arr, item);
+});
 
-const s = JSON.stringify(person);
-console.log(s);
+[7, 10, 1].forEach((x) => {
+  console.log(x);
+});
 
-const obj = JSON.parse(s);
-console.dir(obj);
+[7, 10, 1].forEach((x) => console.log(x));
 
-const letters = ["A", "B", "C", "D"];
-console.log(letters + "");
-console.log(JSON.stringify(letters));
+const log = (x) => console.log(x);
+[7, 10, 1].forEach(log);
 
 console.log("--------------------------");
