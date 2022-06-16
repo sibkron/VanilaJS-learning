@@ -1,32 +1,40 @@
 "use strict";
 
-const log = (s, i) => {
-  console.log(i, s);
-  return s;
-};
+{
+  const matrix = [
+    [7, 10, 1, 5, 2],
+    [6, -1, 7, 2, 3],
+    [1, 2, 4, -8, 2],
+    [-6, 4, 8, 2, 0],
+  ];
 
-const f1 = (x) => x * 2;
-const f2 = (x) => ++x;
+  const max = (a, b) => (a > b ? a : b);
 
-const compose =
-  (...funcs) =>
-  (x) =>
-    funcs.reduce((v, f) => f(v), x);
+  const res = matrix
+    .map((row) => row.reduce(max))
+    .reduce((acc, rowMax) => acc + rowMax);
 
-const f3 = compose(f1, f2);
+  console.log(res);
 
-const res1 = [7, 10, 1, 5, 2]
-  .filter((x) => x > 4)
-  .map(f3)
-  .reduce((acc, val) => acc + val);
+  for (const i in matrix) {
+    const row = matrix[i];
+    for (const j in row) {
+      const col = row[j];
+      console.log(i, j, col);
+    }
+  }
 
-console.log(res1);
+  matrix.forEach((row, i) => {
+    row.forEach((col, j) => {
+      console.log(i, j, col);
+    });
+  });
+}
 
-[7, 10, 1, 5, 2]
-  .map(log)
-  .map((x) => x * 2)
-  .map(log)
-  .map((x) => ++x)
-  .map(log);
+let count = 0;
+const arr = [7, 10, 1, 5, 2];
+const sum = (acc, val) => (count++, acc + val);
+const res = arr.reduce(sum);
+console.log({ res, count });
 
 console.log("--------------------------");
