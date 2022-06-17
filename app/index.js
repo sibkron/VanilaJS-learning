@@ -1,33 +1,19 @@
 "use strict";
 
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
+const point = (x, y) => {
+  const p = {};
 
-  static from(obj) {
-    const { x, y } = obj;
-    return new Point(x, y);
-  }
+  p.move = (dx, dy) => {
+    x += dx;
+    y += dy;
+  };
 
-  move(x, y) {
-    this.x += x;
-    this.y += y;
-  }
+  p.toString = () => `[${x}, ${y}]`;
 
-  toString() {
-    return `[${this.x}, ${this.y}]`;
-  }
-}
+  return p;
+};
 
-console.log("function prototype: ", function () {}.prototype);
-console.log("lambda prototype: ", (() => {}).prototype);
-
-console.log("Point prototype: ", Point.prototype);
-console.log("move prototype: ", Point.prototype.move.prototype);
-
-const p1 = new Point(10, 20);
+const p1 = point(10, 20);
 p1.move(-5, 10);
 
 console.log(p1);
