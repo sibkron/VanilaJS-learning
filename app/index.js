@@ -1,23 +1,36 @@
 "use strict";
 
-const point = (x, y) => {
-  const p = {};
+class Rect {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
 
-  p.move = (dx, dy) => {
-    x += dx;
-    y += dy;
-  };
+  toString() {
+    return `[${this.x}, ${this.y}, ${this.width}, ${this.height}]`;
+  }
 
-  p.toString = () => `[${x}, ${y}]`;
+  get area() {
+    return this.width * this.height;
+  }
 
-  return p;
-};
+  set side(l) {
+    this.width = l;
+    this.height = l;
+  }
+}
 
-const p1 = point(10, 20);
-p1.move(-5, 10);
+class Square extends Rect {
+  constructor(x, y, side) {
+    super(x, y, side, side);
+  }
+}
 
+const p1 = new Square(10, 20, 50);
 console.log(p1);
 console.log(p1.toString());
-console.log(p1 + "");
+console.log(`${p1}`);
 
 console.log("--------------------------");
