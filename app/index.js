@@ -1,36 +1,13 @@
 "use strict";
 
-class Rect {
-  constructor(x, y, width, height) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-  }
+const f = (arr) => arr.map((x) => x * 2);
+const collect = (...arr) => arr;
+const mapCollect = (values, f, collect) => {
+  let res = f(values);
+  console.log(res);
+  return collect(res);
+};
 
-  toString() {
-    return `[${this.x}, ${this.y}, ${this.width}, ${this.height}]`;
-  }
-
-  get area() {
-    return this.width * this.height;
-  }
-
-  set side(l) {
-    this.width = l;
-    this.height = l;
-  }
-}
-
-class Square extends Rect {
-  constructor(x, y, side) {
-    super(x, y, side, side);
-  }
-}
-
-const p1 = new Square(10, 20, 50);
-console.log(p1);
-console.log(p1.toString());
-console.log(`${p1}`);
+console.log(mapCollect([1, 2, 3, 4, 5], f, collect));
 
 console.log("--------------------------");
