@@ -1,11 +1,13 @@
 "use strict";
 
-const indexOf = (arr, defNumber = 0) => {
-  return Array.from(arr.entries())
-    .filter((i) => i[1] === defNumber)
-    .map((i) => i[0]);
-};
+const log = (base, n) => Math.log(n) / Math.log(base);
 
-console.log(indexOf([1, 2, 3, 0, 0, 0, 3, 4, 0, 4, 5, 0, 4, 6]));
+const createLog = (base) => (n) => log(base, n);
+
+const lg = createLog(10);
+const ln = createLog(Math.E);
+
+console.log(`lg(5) = ${lg(5)}`);
+console.log(`ln(5) = ${ln(5)}`);
 
 console.log("--------------------------");
