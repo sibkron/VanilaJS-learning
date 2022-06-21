@@ -1,15 +1,10 @@
 "use strict";
 
-const curry =
-  (fn) =>
-  (...args) => {
-    if (fn.length > args.length) {
-      const f = fn.bind(null, ...args);
-      return curry(f);
-    } else {
-      return fn(...args);
-    }
-  };
+const curry = (fn, ...par) => {
+  const curried = (...args) =>
+    fn.length > args.length ? curry(fn.bind(null, ...args)) : fn(...args);
+  return par.length ? curried(...par) : curried;
+};
 
 //Usage
 const sum4 = (a, b, c, d) => a + b + c + d;
