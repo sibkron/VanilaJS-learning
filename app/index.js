@@ -1,7 +1,7 @@
 "use strict";
 
-const { sin, π } = Math;
-const inverse = (f) => (x) => 1 / x;
+const { sin } = Math;
+const inverse = (f) => (x) => 1 / f(x);
 const cosecant = inverse(sin);
 
 const a = cosecant(5);
