@@ -1,20 +1,16 @@
 "use strict";
 
-const fn = (par, callback) => {
-  if (!par) {
-    callback(new Error("Parameter needed"));
-    return;
-  }
-
-  callback(null, "Data" + par);
-  return "Value";
+const fn = (a) => {
+  const b = "Closure variable";
+  return (c) => {
+    console.dir({ a, b, c });
+  };
 };
 
-const res = fn("example", (err, data) => {
-  if (err) throw err;
-  console.dir({ data });
-});
+const f1 = fn("Parameter 1");
+f1("Parameter 2");
 
-console.dir({ res });
+const f2 = fn("Parameter X");
+f2("Parameter Y");
 
 console.log("--------------------------");
