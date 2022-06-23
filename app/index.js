@@ -1,16 +1,33 @@
 "use strict";
 
-const fn = (a) => {
-  const b = "Closure variable";
-  return (c) => {
-    console.dir({ a, b, c });
+const fn = () => {
+  console.log("Generate cache");
+  const cache = {};
+  return (key) => {
+    let res = cache[key];
+    if (res) {
+      console.log("From cache");
+      return res;
+    } else {
+      console.log("Calculate and save to cache");
+      res = "value" + key;
+      cache[key] = res;
+      return res;
+    }
   };
 };
 
-const f1 = fn("Parameter 1");
-f1("Parameter 2");
+const f1 = fn();
+const f2 = fn();
 
-const f2 = fn("Parameter X");
-f2("Parameter Y");
+f1(1);
+f1(2);
+f1(1);
+f1(2);
+
+f2(1);
+f2(2);
+f2(1);
+f2(2);
 
 console.log("--------------------------");
