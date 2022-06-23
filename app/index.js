@@ -1,11 +1,20 @@
 "use strict";
 
-const { sin } = Math;
-const inverse = (f) => (x) => 1 / f(x);
-const cosecant = inverse(sin);
+const fn = (par, callback) => {
+  if (!par) {
+    callback(new Error("Parameter needed"));
+    return;
+  }
 
-const a = cosecant(5);
+  callback(null, "Data" + par);
+  return "Value";
+};
 
-console.log(a);
+const res = fn("example", (err, data) => {
+  if (err) throw err;
+  console.dir({ data });
+});
+
+console.dir({ res });
 
 console.log("--------------------------");

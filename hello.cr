@@ -1,9 +1,25 @@
-name = "Foo Bar"
-pi = 3.14
-radius = 3.0
-yesno = true
-puts "Hello #{name} !"
-puts "PI is #{pi}"
-puts "The area of a circle with a radius of #{radius} is #{pi * radius ** 2}!"
-puts "Boolean #{yesno}"
-p! "Boolean #{yesno}"
+name = "Foo"
+person = {
+  name:    "Foo",
+  number:  42,
+  yesno:   true,
+  fruits:  ["apple", "banana", "peach"],
+  address: {
+    "street"  => "Main str.",
+    "city"    => "Capital",
+    "country" => "Country",
+  },
+}
+
+puts name
+p name
+p! name
+pp! name
+
+puts ""
+puts person
+p person
+p! person
+pp! person
+
+# some comments
