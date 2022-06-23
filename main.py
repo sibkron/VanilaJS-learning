@@ -1,8 +1,6 @@
-def func(x):
-    def add(a):
-        return x + a
-    return add
+def func():
+    pass
 
 
-test = func(100)
-print(test(200))
+print(func)
+print(type(func))
