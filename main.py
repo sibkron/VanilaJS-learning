@@ -1,15 +1,21 @@
-from ast import Lambda
+try:
+    x = int(input())
+except ValueError:
+    print("X должен быть числом!")
+    x = 0
 
+try:
+    y = int(input())
+except ValueError:
+    print("Y должен быть числом!")
+    y = 0
+else:
+    print("Все верно!")
+finally:
+    print("Вывести в любом случае!")
 
-def func(**args):
-    return args
-
-
-print(func(a=2, b=3, c=4))
-
-
-def sum(x, y): return x * y
-print(sum(2,4))
-print(sum('q',4))
-
-print((lambda x, y : x * y)(2,6))
+try:
+    res = x / y
+    print(res)
+except ZeroDivisionError:
+    print("Ошибка! На 0 делить нельзя!")
