@@ -1,13 +1,23 @@
 "use strict";
 
-const fs = require("fs");
-
-const print = (err, data) => {
-  console.log({ lines: data.toString().split("\n").length });
+const getConferences = () => {
+  let onDone = null;
+  const deffered = {
+    data: (callback) => (onDone = callback),
+  };
+  setTimeout(() => {
+    if (onDone) onDone(["Tehran", "Yalta", "Postdam"]);
+  }, 5000);
+  return deffered;
 };
 
-const fileName = "./a.txt";
+//Usage
+const conferences = getConferences();
 
-fs.readFile(fileName, "utf-8", print);
+console.log(conferences);
+
+conferences.data((list) => {
+  console.log(list);
+});
 
 console.log("--------------------------");
