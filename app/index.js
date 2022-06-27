@@ -1,23 +1,22 @@
 "use strict";
 
-const getConferences = () => {
-  let onDone = null;
-  const deffered = {
-    data: (callback) => (onDone = callback),
-  };
-  setTimeout(() => {
-    if (onDone) onDone(["Tehran", "Yalta", "Postdam"]);
-  }, 5000);
-  return deffered;
+const esc = (code, s) => `\x1b[${code}m${s}\x1b[0m`;
+
+const tag = (strings, ...values) => {
+  const result = [strings[0]];
+  let i = 1;
+  for (const val of values) {
+    const str = strings[i++];
+    result.push(esc(i + 1, val), str);
+  }
+  return result.join("");
 };
 
 //Usage
-const conferences = getConferences();
+const greeting = "Ave";
+const person = { name: "Marcus Aurelius", position: "Emperor" };
 
-console.log(conferences);
-
-conferences.data((list) => {
-  console.log(list);
-});
+const text = tag`${greeting} ${person.position} ${person.name}!`;
+console.log(text);
 
 console.log("--------------------------");
