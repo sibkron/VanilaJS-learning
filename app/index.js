@@ -1,22 +1,17 @@
 "use strict";
 
-const esc = (code, s) => `\x1b[${code}m${s}\x1b[0m`;
+const newYearsEve = new Date(1999, 11, 31, 23, 59);
+const arrLocales = ["de-CH", "de", "en"];
+console.log(newYearsEve.toLocaleString("de"));
+console.log(newYearsEve.toLocaleString(arrLocales));
+console.log(newYearsEve.toLocaleString("de", { timeZone: "Asia/Tokyo" }));
+console.log(newYearsEve.toLocaleString("de", { dateStyle: "medium" }));
+console.log(newYearsEve.toLocaleString([], { timeZone: "Asia/Tokyo" }));
 
-const tag = (strings, ...values) => {
-  const result = [strings[0]];
-  let i = 1;
-  for (const val of values) {
-    const str = strings[i++];
-    result.push(esc(i + 1, val), str);
-  }
-  return result.join("");
-};
+let number = 123456.78;
+console.log(number.toLocaleString("de"));
 
-//Usage
-const greeting = "Ave";
-const person = { name: "Marcus Aurelius", position: "Emperor" };
-
-const text = tag`${greeting} ${person.position} ${person.name}!`;
-console.log(text);
+let formatter = new Intl.NumberFormat("de");
+console.log(formatter.format(number));
 
 console.log("--------------------------");
