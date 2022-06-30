@@ -1,17 +1,13 @@
 "use strict";
 
-const newYearsEve = new Date(1999, 11, 31, 23, 59);
-const arrLocales = ["de-CH", "de", "en"];
-console.log(newYearsEve.toLocaleString("de"));
-console.log(newYearsEve.toLocaleString(arrLocales));
-console.log(newYearsEve.toLocaleString("de", { timeZone: "Asia/Tokyo" }));
-console.log(newYearsEve.toLocaleString("de", { dateStyle: "medium" }));
-console.log(newYearsEve.toLocaleString([], { timeZone: "Asia/Tokyo" }));
+const rx1 = /abc/;
+console.log("Do you know abc?".match(rx1));
 
-let number = 123456.78;
-console.log(number.toLocaleString("de"));
+const rx2 = new RegExp("abc");
+console.log("Do you know abc?".match(rx2));
 
-let formatter = new Intl.NumberFormat("de");
-console.log(formatter.format(number));
+const rx3 = /[a-z]+a[a-z]+/g;
+const st3 = "A man can die but once";
+console.log(st3.match(rx3));
 
 console.log("--------------------------");
