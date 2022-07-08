@@ -1,29 +1,21 @@
 "use strict";
 
-const rx = /[abc]/gi;
-console.dir({
-  rx,
-  flags: rx.flags,
-  global: rx.global,
-  ignoreCase: rx.ignoreCase,
-  multiline: rx.multiline,
-  source: rx.source,
-  sticky: rx.sticky,
-  unicode: rx.unicode,
-  lastIndex: rx.lastIndex,
-});
+const s = "Hello <user1@domain.> and user2@domain.com";
 
-console.dir({
-  xyz: rx.test("xyz"),
-  abc: rx.test("abc"),
-});
+const rx = /[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+/g;
 
-const s = "abcdefgabc";
+const m = s.match(rx);
 
-let res;
-do {
-  res = rx.exec(s);
-  console.log({ lastIndex: rx.lastIndex, res });
-} while (res);
+console.dir(m);
+
+const words = (s) => {
+  let mySet = new Set(s.toLowerCase().replace(/\W+/g, " ").trim().split(/\s/));
+  return [...mySet];
+};
+
+const s1 = "Hello World, here we are!";
+
+console.dir(words(s1));
+console.dir(words(s1 + s1));
 
 console.log("--------------------------");
