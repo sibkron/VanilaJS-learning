@@ -17,4 +17,24 @@ const st4 =
   "and some have greatness thrust upon them.";
 console.log(st4.match(rx4));
 
+const rx5 = /.u../g;
+const st5 = "- Such much? - For whow how";
+console.log(st5.match(rx5));
+
+const rx6 = /\w{3,5}/g;
+const st6 = "- MGIMO finished? - Ask?!";
+console.log(st6.match(rx6));
+
+const rx7 = /[^l] /g;
+const st7 = "Nothing will come of nothing";
+console.log(st7.match(rx7));
+
+const rx8 = /^\+?\d{12}$/;
+const st8 = "+380661234567";
+console.log(st8.match(rx8));
+
+const rx9 = /[0-9]+ (hours|days)/g;
+const st9 = "5 days";
+console.log(st9.match(rx9));
+
 console.log("--------------------------");
