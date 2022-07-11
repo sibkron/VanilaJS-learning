@@ -1,24 +1,31 @@
 "use strict";
 
-const wrap = (fn) => {
-  console.log("Wrap function: ", fn.name);
-  return (...args) => {
-    console.log("Called wrapper for: ", fn.name);
-    console.dir({ args });
-    const result = fn(...args);
-    console.log("Ended wrapper for: ", fn.name);
-    console.dir({ result });
-    return result;
-  };
+const wrap =
+  (before, after, fn) =>
+  (...args) =>
+    after(fn(before(...args)));
+
+const func = (par1, par2) => {
+  console.dir({ methhod: { par1, par2 } });
+  return [par1, par2];
 };
 
-const func = (part1, part2) => {
-  console.dir({ part1, part2 });
-  return [part1, part2];
+const before = (...args) => {
+  console.log("before");
+  return args;
 };
 
-func("Uno", "Due");
-const wrapped = wrap(func);
-wrapped("Tre", "Quatro");
+const after = (...args) => {
+  console.log("after");
+  return args;
+};
+
+const wrapped = wrap(before, after, func);
+const res = wrapped("Uno", "Due");
+console.dir({
+  res,
+  func: func.length,
+  wrapped: wrapped.length,
+});
 
 console.log("--------------------------");
