@@ -1,32 +1,24 @@
 "use strict";
 
-const rx1 = /abc/g;
-const s11 = "abcdef";
-const s12 = s11.replace(rx1, "123");
-console.log(s12);
+const wrap = (fn) => {
+  console.log("Wrap function: ", fn.name);
+  return (...args) => {
+    console.log("Called wrapper for: ", fn.name);
+    console.dir({ args });
+    const result = fn(...args);
+    console.log("Ended wrapper for: ", fn.name);
+    console.dir({ result });
+    return result;
+  };
+};
 
-const rx2 = new RegExp("abc", "gi");
-const s21 = "abcdefgABCDEFG";
-const s22 = s21.replace(rx2, "789");
-console.log(s22);
+const func = (part1, part2) => {
+  console.dir({ part1, part2 });
+  return [part1, part2];
+};
 
-const rx3 = /abc/g;
-const s = "abcdefabc";
-const res = s.replace(rx3, (sub, pos, str) => {
-  console.dir({ sub, pos, str });
-  return sub.toUpperCase();
-});
-
-console.log(res);
-
-const rx4 = /def/g;
-const s1 = "abcdefgabc";
-const res1 = s1.search(rx4);
-console.log(res1);
-
-const rx5 = /cba/g;
-const s2 = "abcdefgabc";
-const res2 = s2.search(rx5);
-console.log(res2);
+func("Uno", "Due");
+const wrapped = wrap(func);
+wrapped("Tre", "Quatro");
 
 console.log("--------------------------");
