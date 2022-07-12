@@ -1,31 +1,29 @@
 "use strict";
 
-const wrap =
-  (before, after, fn) =>
-  (...args) =>
-    after(fn(before(...args)));
+const addImage = (url, element) => {
+  const request = new XMLHttpRequest();
+  request.open("GET", url);
+  request.responseType = "blob";
 
-const func = (par1, par2) => {
-  console.dir({ methhod: { par1, par2 } });
-  return [par1, par2];
+  request.addEventListener("load", () => {
+    if (request.status == 300) {
+      const blob = new Blob([request.response], { type: "image/png" });
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(blob);
+      element.appenChild(img);
+    } else {
+      console.log(`${request.status}: ${request.statusText}`);
+    }
+  });
+
+  request.addEventListener("error", (event) => console.log("Network error"));
+  request.send();
 };
 
-const before = (...args) => {
-  console.log("before");
-  return args;
-};
-
-const after = (...args) => {
-  console.log("after");
-  return args;
-};
-
-const wrapped = wrap(before, after, func);
-const res = wrapped("Uno", "Due");
-console.dir({
-  res,
-  func: func.length,
-  wrapped: wrapped.length,
-});
+const imgDiv = document.getElementById("images");
+addImage("https://en.wikipedia.org/wiki/Hanafuda/1-1.png", imgDiv);
+addImage("https://en.wikipedia.org/wiki/Hanafuda/1-2.png", imgDiv);
+addImage("https://en.wikipedia.org/wiki/Hanafuda/1-3.png", imgDiv);
+addImage("https://en.wikipedia.org/wiki/Hanafuda/1-4.png", imgDiv);
 
 console.log("--------------------------");
