@@ -1,43 +1,33 @@
 "use strict";
 
-const throttle = (timeout, f, ...args) => {
-  let timer;
-  let wait = false;
-  let wrapped = null;
+const g1 = {};
+const g2 = {};
+const g3 = { area: 300 };
 
-  const throttled = (...par) => {
-    timer = undefined;
-    if (wait) wrapped(...par);
+g2.area = 200;
+
+const mixinCalculateCost = (obj) => {
+  obj.area = obj.area || 0;
+  obj.calculateCost = function (price) {
+    return this.area * price;
   };
-
-  wrapped = (...par) => {
-    if (!timer) {
-      timer = setTimeout(throttled, timeout, ...par);
-      wait = false;
-      return f(...args.concat(par));
-    } else {
-      wait = true;
-    }
-  };
-
-  return wrapped;
 };
 
-// Usage
+mixinCalculateCost(g1);
 
-const fn = (...args) => {
-  console.log("Function called, args:", args);
-};
+[g1, g2, g3].forEach(mixinCalculateCost);
 
-const ft = throttle(200, fn, "value1");
+console.log(g1.calculateCost(5));
+console.log(g2.calculateCost(5));
+console.log(g3.calculateCost(5));
 
-const timer = setInterval(() => {
-  fn("value2");
-  ft("value3");
-}, 50);
+const t1 = setTimeout(() => {
+  console.log("Hello from timer");
+}, 1000);
 
-setTimeout(() => {
-  clearInterval(timer);
-}, 2000);
+mixinCalculateCost(t1);
+
+t1.area = 10;
+console.log(t1.calculateCost(100));
 
 console.log("--------------------------");
