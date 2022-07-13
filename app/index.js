@@ -1,30 +1,21 @@
 "use strict";
 
-const timeout = (msec, f) => {
-  let timer = setTimeout(() => {
-    if (timer) console.log("Function time out");
-    timer = null;
-  }, msec);
-
+const limit = (count, fn) => {
+  let counter = 0;
   return (...args) => {
-    if (!timer) return;
-    clearTimeout(timer);
-    timer = null;
-    return f(...args);
+    if (counter === count) return;
+    counter++;
+    return fn(...args);
   };
 };
 
-//Usage
 const fn = (par) => {
   console.log("Function called, par: ", par);
 };
 
-const fn100 = timeout(100, fn);
-const fn200 = timeout(200, fn);
-
-setTimeout(() => {
-  fn100("first");
-  fn200("second");
-}, 150);
+const fn2 = limit(2, fn);
+fn2("first");
+fn2("second");
+fn2("third");
 
 console.log("--------------------------");
