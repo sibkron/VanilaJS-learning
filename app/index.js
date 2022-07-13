@@ -1,29 +1,53 @@
 "use strict";
 
-const addImage = (url, element) => {
-  const request = new XMLHttpRequest();
-  request.open("GET", url);
-  request.responseType = "blob";
-
-  request.addEventListener("load", () => {
-    if (request.status == 300) {
-      const blob = new Blob([request.response], { type: "image/png" });
-      const img = document.createElement("img");
-      img.src = URL.createObjectURL(blob);
-      element.appenChild(img);
-    } else {
-      console.log(`${request.status}: ${request.statusText}`);
+const wrapFunction = (f) => {
+  console.log("Wrap function: ", f.name);
+  return (...args) => {
+    console.log("Called wrapper for: ", f.name);
+    console.dir({ args });
+    if (args.length > 0) {
+      const callback = args[args.length - 1];
+      if (typeof callback == "function") {
+        args[args.length - 1] = (...args) => {
+          console.log("Callback: ", f.name);
+          const cbRes = callback(...args);
+          console.log("Callback results: ", cbRes);
+          return cbRes;
+        };
+      }
     }
-  });
-
-  request.addEventListener("error", (event) => console.log("Network error"));
-  request.send();
+    console.log("Call: ", f.name);
+    console.dir(args);
+    const result = f(...args);
+    console.log("Ended wrapper for: ", f.name);
+    console.dir({ result });
+    return result;
+  };
 };
 
-const imgDiv = document.getElementById("images");
-addImage("https://en.wikipedia.org/wiki/Hanafuda/1-1.png", imgDiv);
-addImage("https://en.wikipedia.org/wiki/Hanafuda/1-2.png", imgDiv);
-addImage("https://en.wikipedia.org/wiki/Hanafuda/1-3.png", imgDiv);
-addImage("https://en.wikipedia.org/wiki/Hanafuda/1-4.png", imgDiv);
+const cloneInterface = (anInterface) => {
+  const clone = {};
+  const keys = Object.keys(anInterface);
+  for (const key of keys) {
+    const fn = anInterface[key];
+    clone[key] = wrapFunction(fn);
+  }
+  return clone;
+};
+
+//Usage
+const interfaceName = {
+  methodName(par1, par2, callback) {
+    console.dir({ par1, par2 });
+    callback(null, { field: "value" });
+    return par1;
+  },
+};
+
+const cloned = cloneInterface(interfaceName);
+cloned.methodName("Uno", "Due", (err, data) => {
+  console.log({ err, data });
+  return true;
+});
 
 console.log("--------------------------");
