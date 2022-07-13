@@ -1,21 +1,43 @@
 "use strict";
 
-const limit = (count, fn) => {
-  let counter = 0;
-  return (...args) => {
-    if (counter === count) return;
-    counter++;
-    return fn(...args);
+const throttle = (timeout, f, ...args) => {
+  let timer;
+  let wait = false;
+  let wrapped = null;
+
+  const throttled = (...par) => {
+    timer = undefined;
+    if (wait) wrapped(...par);
   };
+
+  wrapped = (...par) => {
+    if (!timer) {
+      timer = setTimeout(throttled, timeout, ...par);
+      wait = false;
+      return f(...args.concat(par));
+    } else {
+      wait = true;
+    }
+  };
+
+  return wrapped;
 };
 
-const fn = (par) => {
-  console.log("Function called, par: ", par);
+// Usage
+
+const fn = (...args) => {
+  console.log("Function called, args:", args);
 };
 
-const fn2 = limit(2, fn);
-fn2("first");
-fn2("second");
-fn2("third");
+const ft = throttle(200, fn, "value1");
+
+const timer = setInterval(() => {
+  fn("value2");
+  ft("value3");
+}, 50);
+
+setTimeout(() => {
+  clearInterval(timer);
+}, 2000);
 
 console.log("--------------------------");
