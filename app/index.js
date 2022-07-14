@@ -1,11 +1,5 @@
 "use strict";
 
-const extend = (obj, mixin) => {
-  Object.keys(mixin).forEach((key) => (obj[key] = mixin[key]));
-  return obj;
-};
-
-//Usage
 const obj1 = {
   name: "Marcus Aurelius",
   city: "Roma",
@@ -23,9 +17,15 @@ const mix1 = {
   },
 };
 
-extend(obj1, mix1);
+const mix2 = {
+  toString() {
+    return `${this.name} - ${this.city} - ${this.born}`;
+  },
+};
+
+const res = Object.assign(obj1, mix1, mix2);
 console.log(obj1);
-console.log(obj1.toString());
+console.log(res.toString());
 console.log(`His age is ${obj1.age()} as of today`);
 
 console.log("--------------------------");
