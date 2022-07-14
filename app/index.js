@@ -1,31 +1,27 @@
 "use strict";
 
-const obj1 = {
-  name: "Marcus Aurelius",
-  city: "Roma",
-  born: "121-04-26",
-};
-
-const mix1 = {
+const Rect = class {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.height = height;
+    this.width = width;
+  }
   toString() {
-    return `${this.name} was born in ${this.city} in ${this.born}`;
-  },
-  age() {
-    const year = new Date().getFullYear();
-    const born = new Date(this.born).getFullYear();
-    return year - born;
-  },
+    return `[${this.x}, ${this.y}, ${this.width}, ${this.height}]`;
+  }
 };
 
-const mix2 = {
-  toString() {
-    return `${this.name} - ${this.city} - ${this.born}`;
-  },
-};
+const equilateral = (Category) =>
+  class extends Category {
+    constructor(x, y, side) {
+      super(x, y, side, side);
+    }
+  };
 
-const res = Object.assign(obj1, mix1, mix2);
-console.log(obj1);
-console.log(res.toString());
-console.log(`His age is ${obj1.age()} as of today`);
+const Square = equilateral(Rect);
+
+const p1 = new Square(10, 20, 50);
+console.log(p1.toString());
 
 console.log("--------------------------");
