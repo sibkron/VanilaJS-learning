@@ -1,33 +1,31 @@
 "use strict";
 
-const g1 = {};
-const g2 = {};
-const g3 = { area: 300 };
-
-g2.area = 200;
-
-const mixinCalculateCost = (obj) => {
-  obj.area = obj.area || 0;
-  obj.calculateCost = function (price) {
-    return this.area * price;
-  };
+const extend = (obj, mixin) => {
+  Object.keys(mixin).forEach((key) => (obj[key] = mixin[key]));
+  return obj;
 };
 
-mixinCalculateCost(g1);
+//Usage
+const obj1 = {
+  name: "Marcus Aurelius",
+  city: "Roma",
+  born: "121-04-26",
+};
 
-[g1, g2, g3].forEach(mixinCalculateCost);
+const mix1 = {
+  toString() {
+    return `${this.name} was born in ${this.city} in ${this.born}`;
+  },
+  age() {
+    const year = new Date().getFullYear();
+    const born = new Date(this.born).getFullYear();
+    return year - born;
+  },
+};
 
-console.log(g1.calculateCost(5));
-console.log(g2.calculateCost(5));
-console.log(g3.calculateCost(5));
-
-const t1 = setTimeout(() => {
-  console.log("Hello from timer");
-}, 1000);
-
-mixinCalculateCost(t1);
-
-t1.area = 10;
-console.log(t1.calculateCost(100));
+extend(obj1, mix1);
+console.log(obj1);
+console.log(obj1.toString());
+console.log(`His age is ${obj1.age()} as of today`);
 
 console.log("--------------------------");
