@@ -6,5 +6,6 @@
           "args": ["-nologo"]
         }
     },
-    "terminal.integrated.defaultProfile.windows": "PowerShell -nologo"
+    "terminal.integrated.defaultProfile.windows": "PowerShell -nologo",
+    "editor.formatOnType": true
 }
