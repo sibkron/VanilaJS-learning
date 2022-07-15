@@ -1,4 +1,1 @@
-ary = [] of String
-ary << "foo"
-ary << "bar"
-puts ary.map(&.upcase)
+[1, 2, 3, 4, 5, 6].each { |n| v = n }
