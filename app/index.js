@@ -17,22 +17,23 @@ const memoize = (fn) => {
 
 // Usage
 
-const sumSeq = (a, b) => {
-  console.log("Calculate sum");
-  let r = 0;
-  for (let i = a; i < b; i++) r += i;
-  return r;
+const LOOP_COUNT = 10000;
+
+const speedTest = (name, fn, args, count) => {
+  const tmp = [];
+  const start = new Date().getTime();
+  for (let i = 0; i < count; i++) {
+    tmp.push(fn(...args));
+  }
+  const end = new Date().getTime();
+  const time = end - start;
+  console.log(`${name} * ${tmp.length} : ${time}`);
 };
 
-const mSumSeq = memoize(sumSeq);
+const fib = (n) => (n <= 2 ? 1 : fib(n - 1) + fib(n - 2));
+const mFib = memoize(fib);
 
-console.log("First call mSumSeq(2, 5)");
-console.log("Value:", mSumSeq(2, 5));
-
-console.log("Second call mSumSeq(2, 5)");
-console.log("From cache:", mSumSeq(2, 5));
-
-console.log("Call mSumSeq(2, 6)");
-console.log("Calculated:", mSumSeq(2, 6));
+speedTest("fib(20)", fib, [20], LOOP_COUNT);
+speedTest("memoized fib(20)", mFib, [20], LOOP_COUNT);
 
 console.log("--------------------------");
