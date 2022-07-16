@@ -1,10 +1,16 @@
 "use strict";
 
+const crypto = require("crypto");
+
 const argKey = (x) => x.toString() + ":" + typeof x;
-const generateKey = (args) => args.map(argKey).join("|");
+
+const generateKey = (args) => {
+  const key = args.map(argKey).join("|");
+  return crypto.createHash("sha256").update(key).digest("hex");
+};
 
 const memoize = (fn) => {
-  const cache = Object.create(null);
+  const cache = {};
   return (...args) => {
     const key = generateKey(args);
     const val = cache[key];
@@ -17,23 +23,22 @@ const memoize = (fn) => {
 
 // Usage
 
-const LOOP_COUNT = 10000;
-
-const speedTest = (name, fn, args, count) => {
-  const tmp = [];
-  const start = new Date().getTime();
-  for (let i = 0; i < count; i++) {
-    tmp.push(fn(...args));
-  }
-  const end = new Date().getTime();
-  const time = end - start;
-  console.log(`${name} * ${tmp.length} : ${time}`);
+const sumSeq = (a, b) => {
+  console.log("Calculate sum");
+  let r = 0;
+  for (let i = a; i < b; i++) r += i;
+  return r;
 };
 
-const fib = (n) => (n <= 2 ? 1 : fib(n - 1) + fib(n - 2));
-const mFib = memoize(fib);
+const mSumSeq = memoize(sumSeq);
 
-speedTest("fib(20)", fib, [20], LOOP_COUNT);
-speedTest("memoized fib(20)", mFib, [20], LOOP_COUNT);
+console.log("First call mSumSeq(2, 5)");
+console.log("Value:", mSumSeq(2, 5));
+
+console.log("Second call mSumSeq(2, 5)");
+console.log("From cache:", mSumSeq(2, 5));
+
+console.log("Call mSumSeq(2, 6)");
+console.log("Calculated:", mSumSeq(2, 6));
 
 console.log("--------------------------");
