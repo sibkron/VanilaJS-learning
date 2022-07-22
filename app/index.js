@@ -1,44 +1,49 @@
 "use strict";
 
-const crypto = require("crypto");
+console.clear();
 
-const argKey = (x) => x.toString() + ":" + typeof x;
+console.log("log");
 
-const generateKey = (args) => {
-  const key = args.map(argKey).join("|");
-  return crypto.createHash("sha256").update(key).digest("hex");
+const obj = {
+  name: "Marcus Aurelius",
+  city: "Roma",
+  born: 121,
+  children: [
+    {
+      name: "Vibia Aurelia Sabina",
+      city: "Sirmium",
+      born: 170,
+    },
+    {
+      name: "Annia Cornificia Faustina Minor",
+      city: "Roma",
+      born: 160,
+    },
+  ],
 };
 
-const memoize = (fn) => {
-  const cache = {};
-  return (...args) => {
-    const key = generateKey(args);
-    const val = cache[key];
-    if (val) return val;
-    const res = fn(...args);
-    cache[key] = res;
-    return res;
-  };
-};
+Object.defineProperty(obj, "childCount", {
+  enumerable: false,
+  writable: false,
+  value: 13,
+});
 
-// Usage
+console.log({ obj });
 
-const sumSeq = (a, b) => {
-  console.log("Calculate sum");
-  let r = 0;
-  for (let i = a; i < b; i++) r += i;
-  return r;
-};
+console.dir({ obj });
+console.dir({ obj }, { showHidden: true, depth: 20, colors: true });
 
-const mSumSeq = memoize(sumSeq);
+console.error("Error");
 
-console.log("First call mSumSeq(2, 5)");
-console.log("Value:", mSumSeq(2, 5));
+console.time("Loop time");
+const arr = [];
+for (let i = 0; i < 10000; i++) {
+  arr.push(i);
+}
+console.timeEnd("Loop time");
 
-console.log("Second call mSumSeq(2, 5)");
-console.log("From cache:", mSumSeq(2, 5));
+console.trace("Trace here");
 
-console.log("Call mSumSeq(2, 6)");
-console.log("Calculated:", mSumSeq(2, 6));
+console.log("\n" + Object.keys(console).join(", "));
 
 console.log("--------------------------");

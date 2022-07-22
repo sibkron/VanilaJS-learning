@@ -1,39 +1,28 @@
-import sys
-import time
-
-
 def main():
-    print('''Collatz Sequence, or, the 3n + 1 Problem
-
-        The Collatz sequence is a sequence of numbers produced from a starting
-        number n, following three rules:
-
-        1) If n is even, the next number n is n / 2.
-        2) If n is odd, the next number n is n * 3 + 1.
-        3) If n is 1, stop. Otherwise, repeat.
-
-        It is generally thought, but so far not mathematically proven, that
-        every starting number eventually terminates at 1.
-        ''')
-
-    print('Enter a starting number (greater than 0) or QUIT:')
-    response = input('> ')
-
-    if not response.isdecimal() or response == '0':
-        print('You must enter an integer greater than 0.')
-        sys.exit()
-
-    n = int(response)
-    print(n, end='', flush=True)
-    while n != 1:
-        if n % 2 == 0:
-            n = n // 2
+    def even(k) -> bool:
+        if (k % 2) == 0:
+            return True
         else:
-            n = 3 * n + 1
-        print(', ' + str(n), end='', flush=True)
-        time.sleep(0.1)
+            return False
 
-    print()
+    nabor = (1, 2, 3, 4, 5, 6, 4, 7, 7, 8)
+    count = 0
+
+    for value in nabor:
+        if even(value):
+            count += 1
+
+    print("Набор:", nabor)
+    print("Количество четных числе в наборе nabor: ", count)
+
+    def remove_smallest(numbers):
+        print(min(numbers))
+        print(numbers.index(min(numbers)))
+        print(numbers.pop(numbers.index(min(numbers))))
+        print(numbers)
+        return [] if numbers == [] else numbers.pop(numbers.index(min(numbers)))
+
+    remove_smallest([1, 2, 3, 4, 5])
 
 
 if __name__ == "__main__":
