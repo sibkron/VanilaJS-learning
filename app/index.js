@@ -1,39 +1,24 @@
 "use strict";
 
-const readline = require("readline");
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  prompt: "> ",
+console.dir({
+  currentDirectory: process.cwd(),
+  processId: process.pid,
+  platform: process.platform,
+  release: process.release,
+  title: process.title,
+  nodeVersion: process.version,
+  versions: process.versions,
 });
 
-rl.prompt();
-
-const commands = {
-  help() {
-    console.log("Commands: ", Object.keys(commands).join(", "));
-  },
-  hello() {
-    console.log("Hello there!");
-  },
-  exit() {
-    rl.close();
-  },
-};
-
-rl.on("line", (line) => {
-  line = line.trim();
-  const command = commands[line];
-  if (command) {
-    command();
-  } else {
-    console.log("Uknown command");
-  }
-  rl.prompt();
-}).on("close", () => {
-  console.log("Bye!");
-  process.exit(0);
+console.log("\nCommand line parameters:");
+process.argv.forEach((value, index) => {
+  console.log(`${index}: ${value}`);
 });
+
+console.log("\nEnvironment variables:");
+for (const name in process.env) {
+  const value = process.env[name];
+  console.log(`${name}: ${value}`);
+}
 
 console.log("--------------------------");
