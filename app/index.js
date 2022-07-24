@@ -1,35 +1,32 @@
 "use strict";
 
-const write = (s) => process.stdout.write(s);
+const Text = function (s) {
+  this.value = s;
+};
 
-let login = "";
-let password = "";
+Text.prototype.line = function (a) {
+  this.value += "\n" + a;
+  return this;
+};
 
-process.stdin.on("data", (chunk) => {
-  if (!login) {
-    login = chunk.toString().trim();
-    write("\x1b[13;34H");
-  } else {
-    password = chunk.toString().trim();
-    write(`\nHello, ${login}!\n Your password is: ${password}`);
-  }
+Text.prototype.toString = function () {
+  return this.value;
+};
+
+//Usage
+const txt = new Text("line1").line("line2").line("line3").line("line4");
+
+console.log(`${txt}`);
+
+console.log("--------------------------");
+
+const text = (s = "") => ({
+  line: (a) => text(s + "\n" + a),
+  toString: () => s,
 });
 
-write("\x1Bc");
-write("\x1b[10;10H");
+const txt1 = text("line1").line("line2").line("line3").line("line4");
 
-setTimeout(() => {
-  write("\n\n");
-  process.exit(0);
-}, 10000);
-
-write(`
-                      ┌───────────────────────────────┐
-                      │ Login:                        │
-                      │ Password:                     │
-                      └───────────────────────────────┘
-`);
-
-write("\x1b[3A\x1b[31C");
+console.log(`${txt1}`);
 
 console.log("--------------------------");
