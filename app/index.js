@@ -1,24 +1,35 @@
 "use strict";
 
-console.dir({
-  currentDirectory: process.cwd(),
-  processId: process.pid,
-  platform: process.platform,
-  release: process.release,
-  title: process.title,
-  nodeVersion: process.version,
-  versions: process.versions,
+const write = (s) => process.stdout.write(s);
+
+let login = "";
+let password = "";
+
+process.stdin.on("data", (chunk) => {
+  if (!login) {
+    login = chunk.toString().trim();
+    write("\x1b[13;34H");
+  } else {
+    password = chunk.toString().trim();
+    write(`\nHello, ${login}!\n Your password is: ${password}`);
+  }
 });
 
-console.log("\nCommand line parameters:");
-process.argv.forEach((value, index) => {
-  console.log(`${index}: ${value}`);
-});
+write("\x1Bc");
+write("\x1b[10;10H");
 
-console.log("\nEnvironment variables:");
-for (const name in process.env) {
-  const value = process.env[name];
-  console.log(`${name}: ${value}`);
-}
+setTimeout(() => {
+  write("\n\n");
+  process.exit(0);
+}, 10000);
+
+write(`
+                      ┌───────────────────────────────┐
+                      │ Login:                        │
+                      │ Password:                     │
+                      └───────────────────────────────┘
+`);
+
+write("\x1b[3A\x1b[31C");
 
 console.log("--------------------------");
