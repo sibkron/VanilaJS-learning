@@ -1,32 +1,41 @@
 "use strict";
 
-const Text = function (s) {
-  this.value = s;
-};
+class Text {
+  constructor(s) {
+    this.value = s;
+  }
 
-Text.prototype.line = function (a) {
-  this.value += "\n" + a;
-  return this;
-};
+  line(a) {
+    this.value += "\n" + a;
+    return this;
+  }
 
-Text.prototype.toString = function () {
-  return this.value;
-};
+  toString() {
+    return this.value;
+  }
+}
 
-//Usage
 const txt = new Text("line1").line("line2").line("line3").line("line4");
 
 console.log(`${txt}`);
 
-console.log("--------------------------");
-
-const text = (s = "") => ({
-  line: (a) => text(s + "\n" + a),
+const text1 = (s = "") => ({
+  line: (a) => text1(`${s}\n${a}`),
   toString: () => s,
 });
 
-const txt1 = text("line1").line("line2").line("line3").line("line4");
-
+const txt1 = text1("line1").line("line2").line("line3").line("line4");
 console.log(`${txt1}`);
+
+const text2 = (
+  s = "",
+  o = {
+    line: (a) => ((s += "\n" + a), o),
+    toString: () => s,
+  }
+) => o;
+
+const txt2 = text2("line1").line("line2").line("line3").line("line4");
+console.log(`${txt2}`);
 
 console.log("--------------------------");
