@@ -1,21 +1,24 @@
 "use strict";
 
-const text = (
-  s = "",
-  o = {
-    line: (a) => ((s += "\n" + a), o),
-    [Symbol.iterator]: () => ({
-      next() {
-        const res = { value: s, done: this.finished };
-        this.finished = true;
-        return res;
-      },
-    }),
+const sum = async (a, b) => {
+  if (typeof a === "number" && typeof b === "number") {
+    return a + b;
   }
-) => o;
+  throw new Error("a and b should be numbers");
+};
 
-const txt = text("line1").line("line2").line("line3").line("line4");
+(async () => {
+  try {
+    console.log(await sum(2, 3));
+  } catch (e) {
+    console.log(e.message);
+  }
 
-console.log(...txt);
+  try {
+    console.log(await sum(7, "A"));
+  } catch (err) {
+    console.log(err.message);
+  }
+})();
 
 console.log("--------------------------");
