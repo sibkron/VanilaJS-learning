@@ -1,28 +1,26 @@
+from array import array
+
+
 def main():
-    def even(k) -> bool:
-        if (k % 2) == 0:
-            return True
+    count = int(input("Введите количество чисел Фибоначчи:"))
+
+    def fibo(num):
+        if num == 1:
+            return 1
+        elif num == 2:
+            return [1, 1]
         else:
-            return False
+            arr = [1, 1]
+            for i in range(num-2):
+                arr.append(arr[i] + arr[i+1])
+            return arr
 
-    nabor = (1, 2, 3, 4, 5, 6, 4, 7, 7, 8)
-    count = 0
+    print(fibo(count))
 
-    for value in nabor:
-        if even(value):
-            count += 1
+    def factorial(num):
+        return 1 if num == 0 else num * factorial(num-1)
 
-    print("Набор:", nabor)
-    print("Количество четных числе в наборе nabor: ", count)
-
-    def remove_smallest(numbers):
-        print(min(numbers))
-        print(numbers.index(min(numbers)))
-        print(numbers.pop(numbers.index(min(numbers))))
-        print(numbers)
-        return [] if numbers == [] else numbers.pop(numbers.index(min(numbers)))
-
-    remove_smallest([1, 2, 3, 4, 5])
+    print(factorial(count))
 
 
 if __name__ == "__main__":
