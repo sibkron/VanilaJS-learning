@@ -1,24 +1,29 @@
 "use strict";
 
-const sum = async (a, b) => {
-  if (typeof a === "number" && typeof b === "number") {
-    return a + b;
-  }
-  throw new Error("a and b should be numbers");
+const knownObjects = new WeakMap();
+
+const stringfy = (x) => {
+  if (knownObjects.has(x)) return knownObjects.get(x);
+  else return JSON.stringify(x);
 };
 
-(async () => {
-  try {
-    console.log(await sum(2, 3));
-  } catch (e) {
-    console.log(e.message);
-  }
+const logEverything = (name, obj) => {
+  knownObjects.set(obj, name);
+  const getHandler = {
+    get(target, trapKey, reveiver) {
+      return (...args) => {
+        console.log(`Trapping ${trapKey}(${args.map(stringfy)})`);
+        return Reflect[trapKey](...args);
+      };
+    },
+  };
+  const result = new Proxy(obj, new Proxy({}, getHandler));
+  knownObjects.set(result, `proxy of ${name}`);
+  return result;
+};
 
-  try {
-    console.log(await sum(7, "A"));
-  } catch (err) {
-    console.log(err.message);
-  }
-})();
+const fred = { name: "Fred" };
+const proxyOfFred = logEverything("fred", fred);
+proxyOfFred.age = 42;
 
 console.log("--------------------------");
