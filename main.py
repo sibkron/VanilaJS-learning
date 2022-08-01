@@ -1,23 +1,26 @@
+from email import message
+from tkinter.messagebox import NO
+
+
 def main():
-    def sum_dig_pow(a, b):  # range(a, b + 1) will be studied by the function
-        res = []
-        for i in range(a, b + 1):
-            strarr = str(i)
-            print(strarr)
-            dig = 0
-            for j, k in enumerate(strarr):
-                print([j, k, j + 1, int(k) ** (j + 1)])
-                dig += int(k) ** (j + 1)
+    class ChatRoom:
+        def display_message(self, user, message: str) -> None:
+            print(f"[{user} says]: {message}")
 
-            print([i, dig])
-            if i == dig:
-                res.append(dig)
+    class User:
+        def __init__(self, name: str) -> None:
+            self.name = name
+            self.chat_room = ChatRoom()
 
-        return res
+        def say(self, message: str) -> None:
+            self.chat_room.display_message(self, message)
 
-    res = sum_dig_pow(86, 90)
+        def __str__(self) -> str:
+            return self.name
 
-    print(res)
+    petr = User("Petr")
+    petr.say("Hello!")
+    print(petr)
 
 
 if __name__ == "__main__":
