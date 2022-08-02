@@ -1,26 +1,17 @@
-from email import message
-from tkinter.messagebox import NO
+import random
 
 
 def main():
-    class ChatRoom:
-        def display_message(self, user, message: str) -> None:
-            print(f"[{user} says]: {message}")
+    s = random.getstate()
+    print(s)
+    a = [random.randint(1, 10) for _ in range(5)]
+    print(a)
 
-    class User:
-        def __init__(self, name: str) -> None:
-            self.name = name
-            self.chat_room = ChatRoom()
+    random.setstate(s)
+    b = [random.randint(1, 10) for _ in range(5)]
+    print(b)
 
-        def say(self, message: str) -> None:
-            self.chat_room.display_message(self, message)
-
-        def __str__(self) -> str:
-            return self.name
-
-    petr = User("Petr")
-    petr.say("Hello!")
-    print(petr)
+    print(a == b)
 
 
 if __name__ == "__main__":
