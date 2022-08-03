@@ -15,12 +15,16 @@
 (defun with-mode (mode action)
   (let ((*mode* mode)) (funcall action)))
 
+(defun hello-world()
+  (format t "Hello, world!"))
+
 (declaim (ftype (function () null) main))
 (defun main ()
   (format t "~{~a~^ ~}~%" (list
     (process "something")
     (with-mode "faster" (lambda () (process "reliable")))
     (process (list "again"))))
+  (hello-world)
   ())
 
 (main)
