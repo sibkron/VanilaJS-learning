@@ -2,16 +2,14 @@
 
 const timers = require("timers");
 
-console.log(Object.keys(timers));
+const timer = {
+  _onTimeout: () => {
+    console.log("_onTimeout called");
+  },
+};
 
-console.log(
-  "setTimeout === timers.setTimeout",
-  setTimeout === timers.setTimeout
-);
-
-console.dir({ setTimeout: setTimeout(() => {}, 0) });
-console.dir({ setInterval: setInterval(() => {}, 0) });
-console.dir({ setImmediate: setImmediate(() => {}) });
-console.dir({ nextTick: process.nextTick(() => {}) });
+timers.enroll(timer, 1000);
+timers.active(timer);
+console.dir({ timer });
 
 console.log("--------------------------");
