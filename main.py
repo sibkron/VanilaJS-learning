@@ -1,17 +1,21 @@
-import random
-
-
 def main():
-    s = random.getstate()
-    print(s)
-    a = [random.randint(1, 10) for _ in range(5)]
-    print(a)
+    n = int(input("Введите количество матрешек:"))
+    v = int(input("Введите объем наименьшей матрешки:"))
 
-    random.setstate(s)
-    b = [random.randint(1, 10) for _ in range(5)]
-    print(b)
+    def sumV(n, v):
+        res = 0
+        for i in range(n):
+            print(i)
+            res += (1 + 3 * i / 10) ** 3 * v
 
-    print(a == b)
+        return res
+
+    vAllToys = sumV(n, v)
+    bigVToys = (1 + 3 * (n - 1) / 10) ** 3 * v
+    times = vAllToys / bigVToys
+    print(f'Объем самой большой матрешки {bigVToys}')
+    print(f'Объем всех матрешек {vAllToys}')
+    print(f'Объем развернутых матрешек увеличится в {times} раз')
 
 
 if __name__ == "__main__":
