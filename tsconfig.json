@@ -2,7 +2,9 @@
     "compilerOptions": {
     "target": "ES2020",
     "strict": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "noEmitOnError": true,
+    "watch": true
     },
     "filesGlob": [
     "*.ts"
