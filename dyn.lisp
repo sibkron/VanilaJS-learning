@@ -18,6 +18,10 @@
 (defun hello-world()
   (format t "Hello, world!"))
 
+(defun make-cd (title artist rating ripped)
+  (list :title title :artist artist :rating rating :ripped ripped)
+  (format t "~a, ~a, ~a, ~a" title artist rating ripped))  
+
 (declaim (ftype (function () null) main))
 (defun main ()
   (format t "~{~a~^ ~}~%" (list
@@ -25,6 +29,7 @@
     (with-mode "faster" (lambda () (process "reliable")))
     (process (list "again"))))
   (hello-world)
+  (make-cd "Roses" "Kathy Mattea" 7 t)
   ())
 
 (main)
