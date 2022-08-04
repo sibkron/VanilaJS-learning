@@ -1,21 +1,15 @@
+from audioop import mul
+
+
 def main():
-    n = int(input("Введите количество матрешек:"))
-    v = int(input("Введите объем наименьшей матрешки:"))
+    def squared(func):
+        return lambda x: func(x) * func(x)
 
-    def sumV(n, v):
-        res = 0
-        for i in range(n):
-            print(i)
-            res += (1 + 3 * i / 10) ** 3 * v
+    @squared
+    def mult_2(a):
+        return a * 2
 
-        return res
-
-    vAllToys = sumV(n, v)
-    bigVToys = (1 + 3 * (n - 1) / 10) ** 3 * v
-    times = vAllToys / bigVToys
-    print(f'Объем самой большой матрешки {bigVToys}')
-    print(f'Объем всех матрешек {vAllToys}')
-    print(f'Объем развернутых матрешек увеличится в {times} раз')
+    print(mult_2(5))
 
 
 if __name__ == "__main__":
