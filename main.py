@@ -1,20 +1,22 @@
-from audioop import mul
-
-
 def main():
-    def points(games):
-        res = 0
-        for i in games:
-            x = int(i[0])
-            y = int(i[-1])
-            if (x > y):
-                res += 3
-            elif (x == y):
-                res += 1
-        return res
+    digit = str(input("Введите число: "))
 
-    print(points(['1:0', '2:0', '3:0', '4:0', '2:1',
-          '3:1', '4:1', '3:2', '4:2', '4:3']))
+    def digitReplace(num):
+        return ''.join(list(map(lambda x: str(9 - int(x)), num)))
+
+    print(digitReplace(digit))
+
+    firstList = [12, 3, 456, 78]
+
+    def digitJoin(num):
+        return ''.join(list(map(lambda x: str(x), num)))
+
+    print(digitJoin(firstList))
+
+    def digitSrav(list1, list2):
+        return str(True if list1.sort() == list2.sort() else False)
+
+    print(digitSrav([1, 2, 3, 4, 5, 6], [2, 4, 5, 1, 3, 6]))
 
 
 if __name__ == "__main__":
