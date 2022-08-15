@@ -1,17 +1,13 @@
-function getFinalPrice(price: number, discount: number) {
-    return price - price / discount;
+type Foot = number;
+type Pound = number;
+
+type Patient = {
+    name: string:
+    height: Foot;
+    weight?: Pound;
 }
 
-console.log(getFinalPrice(100, 10));
-console.log(getFinalPrice(100, 8));
-
-function whoAmi(target: Function): void{
-    console.log(`You are: \n ${target}`);
+let patient: Patient = {
+    name: 'Joe Smith',
+    height: 5
 }
-
-@whoAmi
-class Friend {
-    constructor(private name: string, private age: number) { };
-}
-
-let petr = new Friend("Petr", 38);
