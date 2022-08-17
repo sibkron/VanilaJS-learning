@@ -1,34 +1,31 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SearchFailedAction = exports.SearchSuccessAction = exports.SearchAction = void 0;
-class SearchAction {
-    constructor(payload) {
-        this.payload = payload;
-        this.actionType = "SEARCH";
+class Dog {
+    constructor(name) {
+        this.name = name;
+    }
+    ;
+    sayHello() {
+        return "Dog says Hello!";
     }
 }
-exports.SearchAction = SearchAction;
-class SearchSuccessAction {
-    constructor(payload) {
-        this.payload = payload;
-        this.actionType = "SEARCH_SUCCESS";
+class Fish {
+    constructor(name) { }
+    ;
+    dive(howDeep) {
+        return `Diving ${howDeep} feet.`;
     }
 }
-exports.SearchSuccessAction = SearchSuccessAction;
-class SearchFailedAction {
-    constructor() {
-        this.actionType = "SEARCH_FAILED";
+function talkToPet(pet) {
+    if (pet instanceof Dog) {
+        return pet.sayHello();
+    }
+    else if (pet instanceof Fish) {
+        return 'Fish cannot talk, sorry.';
     }
 }
-exports.SearchFailedAction = SearchFailedAction;
-function area(shape) {
-    switch (shape.kind) {
-        case "rectangle": return shape.heigth * shape.width;
-        case "circle": return Math.PI * shape.radius ** 2;
-    }
-}
-const myRectangle = { kind: "rectangle", width: 10, heigth: 20 };
-console.log(`Rectangle's area is ${area(myRectangle)}`);
-const myCircle = { kind: "circle", radius: 10 };
-console.log(`Circle's area is ${area(myCircle)}`);
+const myDog = new Dog('Sammy');
+const myFish = new Fish('Marry');
+console.log(talkToPet(myDog));
+console.log(talkToPet(myFish));
+//console.log(talkToPet({name: 'John'}));
 //# sourceMappingURL=main.js.map
