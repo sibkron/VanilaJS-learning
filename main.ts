@@ -1,33 +1,26 @@
-class Dog{
-    constructor(readonly name: string) { };
+class AppState{
+    counter = 0;
 
-    sayHello(): string {
-        return "Dog says Hello!";
+    private static instanceRef: AppState;
+
+    private constructor() { };
+    
+    static getInstance(): AppState {
+        if (AppState.instanceRef === undefined) {
+            AppState.instanceRef = new AppState();
+        }
+
+        return AppState.instanceRef;
     }
 }
 
-class Fish{
-    constructor(name: string) { };
+const appState1 = AppState.getInstance();
+const appState2 = AppState.getInstance();
 
-    dive(howDeep: number): string{
-        return `Diving ${howDeep} feet.`;
-    }
-}
+appState1.counter++;
+appState1.counter++;
+appState2.counter++;
+appState2.counter++;
 
-type Pet = Dog | Fish;
-
-function talkToPet(pet: Pet): string | undefined{
-    if (pet instanceof Dog) {
-        return pet.sayHello();
-    } else if (pet instanceof Fish) {
-        return 'Fish cannot talk, sorry.';
-    }
-}
-
-const myDog = new Dog('Sammy');
-const myFish = new Fish('Marry');
-
-console.log(talkToPet(myDog));
-console.log(talkToPet(myFish));
-//console.log(talkToPet({name: 'John'}));
-
+console.log(appState1.counter);
+console.log(appState2.counter);

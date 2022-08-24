@@ -1,31 +1,22 @@
 "use strict";
-class Dog {
-    constructor(name) {
-        this.name = name;
+class AppState {
+    constructor() {
+        this.counter = 0;
     }
     ;
-    sayHello() {
-        return "Dog says Hello!";
+    static getInstance() {
+        if (AppState.instanceRef === undefined) {
+            AppState.instanceRef = new AppState();
+        }
+        return AppState.instanceRef;
     }
 }
-class Fish {
-    constructor(name) { }
-    ;
-    dive(howDeep) {
-        return `Diving ${howDeep} feet.`;
-    }
-}
-function talkToPet(pet) {
-    if (pet instanceof Dog) {
-        return pet.sayHello();
-    }
-    else if (pet instanceof Fish) {
-        return 'Fish cannot talk, sorry.';
-    }
-}
-const myDog = new Dog('Sammy');
-const myFish = new Fish('Marry');
-console.log(talkToPet(myDog));
-console.log(talkToPet(myFish));
-//console.log(talkToPet({name: 'John'}));
+const appState1 = AppState.getInstance();
+const appState2 = AppState.getInstance();
+appState1.counter++;
+appState1.counter++;
+appState2.counter++;
+appState2.counter++;
+console.log(appState1.counter);
+console.log(appState2.counter);
 //# sourceMappingURL=main.js.map
