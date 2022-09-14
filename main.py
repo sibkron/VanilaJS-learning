@@ -1,6 +1,3 @@
-from datetime import datetime
-
-
 def main():
     def DNA_strand(dna):
         return dna.replace('A', 'T').replace('T', 'A')

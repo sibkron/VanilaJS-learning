@@ -1,22 +1,27 @@
 "use strict";
-class AppState {
-    constructor() {
-        this.counter = 0;
+class Person {
+    constructor(firstName, lastName, age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
     }
-    ;
-    static getInstance() {
-        if (AppState.instanceRef === undefined) {
-            AppState.instanceRef = new AppState();
-        }
-        return AppState.instanceRef;
+    sellStock(symbol, numberOfShares) {
+        console.log(`Selling ${numberOfShares} of ${symbol}`);
     }
 }
-const appState1 = AppState.getInstance();
-const appState2 = AppState.getInstance();
-appState1.counter++;
-appState1.counter++;
-appState2.counter++;
-appState2.counter++;
-console.log(appState1.counter);
-console.log(appState2.counter);
+class Employee extends Person {
+    constructor(firstName, lastName, age, department) {
+        super(firstName, lastName, age);
+        this.department = department;
+    }
+    sellStock(symbol, shares) {
+        super.sellStock(symbol, shares);
+        this.reportToCompliance(symbol, shares);
+    }
+    reportToCompliance(symbol, shares) {
+        console.log(`${this.lastName} from ${this.department} sold ${shares} shares of ${symbol}`);
+    }
+}
+const emp1 = new Employee("John", "Smith", 29, "Accounting");
+emp1.sellStock('IBM', 100);
 //# sourceMappingURL=main.js.map

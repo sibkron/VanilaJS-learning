@@ -1,26 +1,28 @@
-class AppState{
-    counter = 0;
+class Person{
+    constructor(public firstName: string, public lastName: string, private age: number) {
+        
+    }
 
-    private static instanceRef: AppState;
-
-    private constructor() { };
-    
-    static getInstance(): AppState {
-        if (AppState.instanceRef === undefined) {
-            AppState.instanceRef = new AppState();
-        }
-
-        return AppState.instanceRef;
+    sellStock(symbol: string, numberOfShares: number) {
+        console.log(`Selling ${numberOfShares} of ${symbol}`);
     }
 }
 
-const appState1 = AppState.getInstance();
-const appState2 = AppState.getInstance();
+class Employee extends Person{
+    constructor(firstName: string, lastName: string, age: number, public department: string) {
+        super(firstName, lastName, age);
+    }
 
-appState1.counter++;
-appState1.counter++;
-appState2.counter++;
-appState2.counter++;
+    sellStock(symbol: string, shares: number): void {
+        super.sellStock(symbol, shares);
 
-console.log(appState1.counter);
-console.log(appState2.counter);
+        this.reportToCompliance(symbol, shares);
+    }
+
+    private reportToCompliance(symbol: string, shares: number) {
+        console.log(`${this.lastName} from ${this.department} sold ${shares} shares of ${symbol}`);
+    }
+}
+
+const emp1 = new Employee("John", "Smith", 29, "Accounting");
+emp1.sellStock('IBM', 100);
